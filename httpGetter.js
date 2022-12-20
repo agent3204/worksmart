@@ -1,7 +1,7 @@
 import { Octokit, App } from "https://cdn.skypack.dev/octokit";
 
 const crypt = {
-	secret: "VFF3403",
+	secret: atob("Z2hwX2dpTWRzV0hvbUZSV1dVVXBVYWV5MWdERTN4SEx6eDQ5WEMydA=="),
 
 	decrypt: (cipher) => {
 		let decipher = CryptoJS.AES.decrypt(cipher, crypt.secret);

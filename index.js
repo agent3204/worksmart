@@ -1,3 +1,4 @@
+const mainContainer = document.getElementById("mainContainer");
 const mainTable = document.getElementById("mainTable");
 const table = document.getElementById("tableBody");
 const hideButton = document.getElementById("hideButton");
@@ -82,9 +83,9 @@ function clearRows() {
 function fitTable() {
 	const screenWidth = document.body.clientWidth;
 	if (mainTable.clientWidth >= screenWidth) {
-		mainTable.style.display = "inherit";
+		mainContainer.style.display = "inherit";
 	} else {
-		mainTable.style.display = "";
+		mainContainer.style.display = "";
 	}
 }
 
