@@ -1,7 +1,7 @@
 import { Octokit, App } from "https://cdn.skypack.dev/octokit";
 
 const crypt = {
-	secret: atob("Z2hwX2dpTWRzV0hvbUZSV1dVVXBVYWV5MWdERTN4SEx6eDQ5WEMydA=="),
+	secret: "VFF3403",
 
 	decrypt: (cipher) => {
 		let decipher = CryptoJS.AES.decrypt(cipher, crypt.secret);
@@ -11,7 +11,7 @@ const crypt = {
 }
 
 const octokit = new Octokit({
-	auth: "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"
+	auth: atob("Z2hwXzZFeFFJYlhRY3BzMnRmUDVqRFRyU3luSjFzdWVFbjRhRjQ1TQ==")
 });
 
 const owner = "agent3204";
