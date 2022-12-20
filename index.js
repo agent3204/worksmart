@@ -1,3 +1,4 @@
+const mainTable = document.getElementById("mainTable");
 const table = document.getElementById("tableBody");
 const hideButton = document.getElementById("hideButton");
 
@@ -78,5 +79,17 @@ function clearRows() {
 	}
 }
 
+function fitTable() {
+	const screenWidth = document.body.clientWidth;
+	if (mainTable.clientWidth >= screenWidth) {
+		mainTable.style.display = "inherit";
+	} else {
+		mainTable.style.display = "";
+	}
+}
+
 createRow("lopez.jhonmaikol@artazaromo.com", "gkadodfouhjrw", Date.now());
 createRow("urmomo@gmail.com", "peterpumpkineater69", Date.now());
+
+addEventListener("resize", fitTable);
+fitTable();
