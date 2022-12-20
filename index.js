@@ -70,6 +70,8 @@ function createRow(email, password, timestamp) {
 	passInput.getElementsByClassName("copy-link-button")[0].addEventListener("click", () => {
 		navigator.clipboard.writeText(password);
 	});
+
+	fitTable();
 }
 
 function clearRows() {
@@ -78,6 +80,8 @@ function clearRows() {
 		elm.remove();
 		savedRows.pop();
 	}
+
+	fitTable();
 }
 
 function fitTable() {

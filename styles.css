@@ -11,6 +11,32 @@ body {
 	margin-bottom: 12px;
 }
 
+#buttonsContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button {
+	width: 120px;
+	height: 24px;
+	border: none;
+	margin: 5px;
+	font-size: 15px;
+	box-shadow: 5px 5px rgba(20, 20, 20, 0.2);
+	background-color: #4a4a4a;
+	color: white;
+}
+
+.button:hover {
+	background-color: #444444;
+}
+
+.button:active {
+	transform: translate(2px, 2px);
+	box-shadow: none;
+}
+
 table {
 	width: 80%;
 	background-color: white;
