@@ -13,19 +13,7 @@
 <body>
 	<p id="onLine"></p>
 	<script src="onlinechecker.js"></script>
-	<button id="jsonSource" onclick="
-	if (window.contentSource) {
-		const tab = window.open('about:blank', '_blank');
-		const pre = tab.document.createElement('pre');
-		pre.style.wordWrap = 'break-word';
-		pre.style.whiteSpace = 'pre-wrap';
-		pre.textContent = window.contentSource;
-		tab.document.head.innerHTML = '<meta name=\'color-scheme\' content=\'light-dark\'>'
-		tab.document.body.style.backgroundColor = '#0f0f0f';
-		tab.document.body.style.color = 'white';
-		tab.document.body.appendChild(pre);
-	}
-	">JSON source</button>
+	<button id="jsonSource">JSON source</button>
 	<h1>Registro de cuentas</h1>
 	<div id="buttonsContainer">
 		<button id="hideButton" class="button">Ocultar</button>

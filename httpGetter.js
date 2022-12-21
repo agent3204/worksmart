@@ -18,6 +18,19 @@ const owner = "agent3204";
 const repo = "data";
 const path = "ds.json";
 
+const jsonSourceButton = document.getElementById("jsonSource");
+
+let contentSource;
+
+jsonSourceButton.addEventListener("click", () => {
+	if (contentSource) {
+		const tab = window.open("blank_site/blank.html", "_blank");
+		tab.addEventListener("load", () => {
+			tab.document.getElementsByTagName("pre")[0].textContent = contentSource;
+		});
+	}
+});
+
 async function getFileData() {
 	const {data} = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
 		owner: owner,
@@ -63,7 +76,7 @@ async function update() {
 		const source = atob(data.content);
 		const content = jsonParse(source);
 
-		window.contentSource = source ?? "";
+		contentSource = source ?? "";
 
 		if (!(content instanceof Object)) {
 			console.warn("The json content isn't an Object");
