@@ -55,16 +55,17 @@ function createRow(email, password, timestamp) {
 	const row = table.insertRow(0); // The place 0 is for header
 	savedRows.push(row);
 
-	row.insertCell(0).innerHTML = email;
+	row.insertCell(0).textContent = email;
 	const passInput = row.insertCell(1);
 	passInput.setAttribute("class", "passwordEntry");
-	passInput.innerHTML = `<p class="passwordText" value="${password}"></p>
+	passInput.innerHTML = `<p class="passwordText"></p>
 						<button class="copy-link-button" hidden>
 							<span class="material-icons">content_copy</span>
 						</button>`
+	passInput.getElementsByTagName("p")[0].setAttribute("value", password);
 	updatePassTypes();
 	const dateElm = row.insertCell(2);
-	dateElm.innerHTML = "Hace " + timeAgo(Date.now() - timestamp); //new Date(timestamp).toDateString();
+	dateElm.textContent = "Hace " + timeAgo(Date.now() - timestamp); //new Date(timestamp).toDateString();
 	dateElm.setAttribute("aria-label", "Hola");
 
 	passInput.getElementsByClassName("copy-link-button")[0].addEventListener("click", () => {
@@ -93,8 +94,8 @@ function fitTable() {
 	}
 }
 
-createRow("lopez.jhonmaikol@artazaromo.com", "gkadodfouhjrw", Date.now());
-createRow("urmomo@gmail.com", "peterpumpkineater69", Date.now());
+//createRow("lopez.jhonmaikol@artazaromo.com", "gkadodfouhjrw", Date.now());
+//createRow("urmomo@gmail.com", "peterpumpkineater69", Date.now());
 
 addEventListener("resize", fitTable);
 fitTable();
