@@ -1,0 +1,10 @@
+#jsonSource {
+	position: absolute;
+	right: 20px;
+	background-color: black;
+	color: white;
+	border: none;
+	padding: 5px;
+	border-radius: 10px;
+	cursor: pointer;
+}

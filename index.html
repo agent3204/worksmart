@@ -6,12 +6,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="styles.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+	<link rel="stylesheet" href="status.css">
+	<link rel="stylesheet" href="jsonSource.css">
 </head>
 <body>
 	<p id="onLine"></p>
 	<script src="onlinechecker.js"></script>
+	<button id="jsonSource" onclick="
+	if (window.contentSource) {
+		const tab = window.open('about:blank', '_blank');
+		const pre = tab.document.createElement('pre');
+		pre.style.wordWrap = 'break-word';
+		pre.style.whiteSpace = 'pre-wrap';
+		pre.textContent = window.contentSource;
+		tab.document.head.innerHTML = '<meta name=\'color-scheme\' content=\'light-dark\'>'
+		tab.document.body.style.backgroundColor = '#0f0f0f';
+		tab.document.body.style.color = 'white';
+		tab.document.body.appendChild(pre);
+	}
+	">JSON source</button>
 	<h1>Registro de cuentas</h1>
 	<div id="buttonsContainer">
 		<button id="hideButton" class="button">Ocultar</button>
@@ -29,6 +43,10 @@
 			<tbody id="tableBody"></tbody>
 		</table>
 	</div>
+	<div id="statusContainer">
+		<p>Updating...ajsdijasdiasdj</p>
+	</div>
+	<script src="statusScript.js"></script>
 	<script src="index.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 	<script src="httpGetter.js" type="module"></script>

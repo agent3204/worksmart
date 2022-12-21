@@ -29,7 +29,7 @@ body {
 	padding-right: 10px;
 	padding-left: 10px;
 	border-radius: 4px;
-	width: calc();
+	opacity: 0.5;
 }
 
 .button {

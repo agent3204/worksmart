@@ -52,6 +52,7 @@ hideButton.addEventListener("click", () => {
 });
 
 function createRow(email, password, timestamp) {
+	
 	const row = table.insertRow(0); // The place 0 is for header
 	savedRows.push(row);
 

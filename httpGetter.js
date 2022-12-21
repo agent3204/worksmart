@@ -51,33 +51,44 @@ async function update() {
 		return;
 	}
 
+	setStatus("Updating...");
 	updating = true;
 	console.log("Updating table...");
 	clearRows();
 
-	const data = await getFileData();
-	const content = jsonParse(atob(data.content));
 	const order = [];
 
-	if (!(content instanceof Object)) {
-		console.warn("The json content isn't an Object");
-		content = {};
-	}
+	try {
+		const data = await getFileData();
+		const source = atob(data.content);
+		const content = jsonParse(source);
 
-	Object.keys(content).forEach(key => {
-		const data = content[key];
-		data.email = key;
-		if (data.encrypted) {
-			data.pwd = crypt.decrypt(data.pwd);
+		window.contentSource = source ?? "";
+
+		if (!(content instanceof Object)) {
+			console.warn("The json content isn't an Object");
+			content = {};
 		}
-		order.push(data);
-	});
 
-	order.sort((a, b) => a.timestamp - b.timestamp);
+		Object.keys(content).forEach(key => {
+			const data = content[key];
+			data.email = key;
+			if (data.encrypted) {
+				data.pwd = crypt.decrypt(data.pwd);
+			}
+			order.push(data);
+		});
 
-	for (let i = 0; i < order.length; i++) {
-		const data = order[i];
-		createRow(data.email, data.pwd, data.timestamp);
+		order.sort((a, b) => a.timestamp - b.timestamp);
+
+		for (let i = 0; i < order.length; i++) {
+			const data = order[i];
+			createRow(data.email, data.pwd, data.timestamp);
+		}
+	} catch (ex) {
+		setStatus("Error: " + ex);
+	} finally {
+		setStatus("Updated! Total of " + order.length + " elements");
 	}
 
 	console.log("Updated!");
