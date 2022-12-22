@@ -18,7 +18,7 @@ const owner = "agent3204";
 const repo = "data";
 const path = "ds.json";
 
-const jsonSourceButton = document.getElementById("jsonSource");
+const jsonSourceButton = document.getElementsByClassName("jsonButton")[0];
 
 let contentSource;
 
@@ -64,7 +64,7 @@ async function update() {
 		return;
 	}
 
-	setStatus("Updating...");
+	setStatus("Actualizando...");
 	updating = true;
 	console.log("Updating table...");
 	clearRows();
@@ -101,7 +101,7 @@ async function update() {
 	} catch (ex) {
 		setStatus("Error: " + ex);
 	} finally {
-		setStatus("Updated! Total of " + order.length + " elements");
+		setStatus("¡Actualizado! Total de " + order.length + " elementos");
 	}
 
 	console.log("Updated!");
