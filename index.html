@@ -4,44 +4,44 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Saved Emails</title>
-	<link rel="stylesheet" href="styles.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-	<link rel="stylesheet" href="status.css">
-	<link rel="stylesheet" href="jsonSource.css">
+	<meta name="theme-color" content="#1d1d1d">
+	<title>Secret Access</title>
+	<link rel="shortcut icon" href="images/favicon32.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<!-- <p id="onLine"></p> -->
-	<!-- <script src="onlinechecker.js"></script> -->
-	<!-- <button id="jsonSource">JSON source</button> -->
-	<div>Esta versión esta obsoleta, <a href="http://pwdaccess.epizy.com/">prueba esta versión</a></div>
-	<div class="jsonButton">
-		<img src="images/json_icon.png" alt="">
-		<p>JSON source</p>
-	</div>
-	<h1>Registro de cuentas</h1>
-	<div id="buttonsContainer">
-		<button id="hideButton" class="button">Ocultar</button>
-		<button id="update" class="button">Actualizar</button>
-	</div>
-	<div id="mainContainer">
-		<table id="mainTable">
-			<thead>
-				<tr>
-					<th>Correo electrónico</th>
-					<th>Contraseña</th>
-					<th>Fecha de subida</th>
-				</tr>
-			</thead>
-			<tbody id="tableBody"></tbody>
-		</table>
-	</div>
-	<div id="statusContainer">
-		<p>Updating...ajsdijasdiasdj</p>
-	</div>
-	<script src="statusScript.js"></script>
-	<script src="index.js"></script>
+	<header>
+		<div id="json_button">
+			<img src="images/json_icon.png" alt="json icon">
+		</div>
+	</header>
+	<main>
+		<h1>Registro de cuentas</h1>
+		<div id="botones">
+			<button id="ocultar">Mostrar</button>
+			<button id="actualizar">Actualizar</button>
+		</div>
+		<div id="dataTableContainer">
+			<table id="mainTable">
+				<thead>
+					<tr>
+						<th>Email</th>
+						<th>Contraseña</th>
+						<th>Último cambio</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot>
+					<tr>
+						<td id="status" colspan="3">Cargando...</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</main>
+	<script src="table.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-	<script src="httpGetter.js" type="module"></script>
+	<script src="github_stuff.js"></script>
 </body>
 </html>
