@@ -14,10 +14,6 @@
 	const status = document.getElementById("status");
 	const jsonButton = document.getElementById("jsonButton");
 	
-	// const octokit = new Octokit({
-	// 	auth: atob("Z2hwXzZFeFFJYlhRY3BzMnRmUDVqRFRyU3luSjFzdWVFbjRhRjQ1TQ==")
-	// });
-
 	let updating = false;
 	let lastUpdate = 0;
 	let json_content = null;
