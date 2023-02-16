@@ -8,40 +8,84 @@
 	<title>Secret Access</title>
 	<link rel="shortcut icon" href="images/favicon32.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/formStyle.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-	<header>
-		<div id="json_button">
-			<img src="images/json_icon.png" alt="json icon">
-		</div>
-	</header>
-	<main>
-		<h1>Registro de cuentas</h1>
-		<div id="botones">
-			<button id="ocultar">Mostrar</button>
-			<button id="actualizar">Actualizar</button>
-		</div>
-		<div id="dataTableContainer">
-			<table id="mainTable">
-				<thead>
-					<tr>
-						<th>Email</th>
-						<th>Contraseña</th>
-						<th>Último cambio</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-				<tfoot>
-					<tr>
-						<td id="status" colspan="3">Cargando...</td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-	</main>
-	<script src="table.js"></script>
+	<div id="accessForm" style="display: none;">
+		<form onsubmit="return false">
+			<span id="formTitle">Acceso</span>
+			<span>Ingresa las claves secretas</span>
+			<div>
+				<div class="inputBox">
+					<input id="decoderInput" class="accessInput" type="password" required>
+					<span>Decodificador</span>
+				</div>
+				<div class="inputBox">
+					<input id="tokenInput" class="accessInput" type="password" required>
+					<span>Token</span>
+				</div>
+			</div>
+			<div id="saveSecretDiv">
+				<input type="checkbox" name="save" id="save">
+				<label id="saveSecret" for="save">Guardar clave</label>
+			</div>
+			<input id="submit" type="submit" value="Acceder">
+		</form>
+	</div>
+	<div id="registers" style="display: none;">
+		<header>
+			<div class="headSide">
+				<div id="jsonButton" class="top_button">
+					<img src="images/json_icon.png" alt="json icon">
+					<span>Contenido</span>
+				</div>
+			</div>
+			<h1 id="title">Registro de cuentas</h1>
+			<div class="headSide">
+				<div id="logoutButton" class="top_button">
+					<img id="changeKey" src="https://www.iconsdb.com/icons/preview/white/logout-xxl.png" alt="">
+					<span>Cambiar Clave</span>
+				</div>
+				<!-- <button id="changeKey">Cambiar clave</button> -->
+			</div>
+		</header>
+		<main>
+			<div id="container">
+				<div id="buttons">
+					<div>
+						<button id="actualizar">Actualizar</button>
+					</div>
+					<div>
+						<input type="search" class="search-input" id="search" placeholder="Buscar" autocomplete="off" spellcheck="false">
+					</div>
+				</div>
+				<div id="dataTableContainer">
+					<table id="mainTable">
+						<thead>
+							<tr>
+								<!-- <th>Email</th> -->
+								<th>Email</th>
+								<th>Contraseña</th>
+								<th>Último cambio</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						<tfoot>
+							<tr>
+								<td id="status" colspan="3">Cargando...</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</main>
+	</div>
+	<script src="scripts/octokit.js"></script>
+	<script src="scripts/form.js"></script>
+	<script src="scripts/table.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-	<script src="github_stuff.js"></script>
+	<script src="scripts/github_stuff.js"></script>
 </body>
 </html>

@@ -1,40 +1,90 @@
 /* Variables */
 
 :root {
-	--pallete-dark: rgb(37, 37, 37);
+	--pallete-dark: rgb(34, 34, 34);
 	/* --thead-color: rgb(37, 37, 37);
 	--tbody-primary-color: rgb(40, 40, 40);
 	--tbody-secondary-color: rgb(46, 46, 46); */
 	--thead-color: rgba(20, 20, 20, 0.1);
 	--tbody-primary-color: rgba(100, 100, 100, 0.05);
+	--background-color: rgb(43, 43, 47);
 }
 
 /* Header styles */
 
-#json_button {
-	cursor: pointer;
+#jsonButton {
+	float: left;
 }
 
-#json_button img {
-	height: 28px;
-	background-color: var(--pallete-dark);
-	padding: 2px 4px;
-	border-radius: 8px;
+#jsonButton img {
+	height: 24px;
+	/* padding: 2px 4px;
+	border-radius: 8px; */
 }
 
-header {
+/* header {
 	position: absolute;
 	box-sizing: border-box;
 	padding: 10px;
 	display: flex;
 	justify-content: space-between;
+} */
+
+header {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+
+.headSide {
+	width: 20px;
+}
+
+/* #changeKey {
+	float: right;
+	white-space: nowrap;
+	color: white;
+	background-color: rgb(34, 34, 34);
+	border: none;
+	height: 30px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-weight: 600;
+} */
+
+#logoutButton {
+	float: right;
+}
+
+#logoutButton img {
+	height: 20px;
+}
+
+.top_button {
+	display: flex;
+	background-color: var(--pallete-dark);
+	white-space: nowrap;
+	align-items: center;
+	padding: 6px;
+	cursor: pointer;
+	border-radius: 8px;
+	gap: 5px;
+	height: 20px;
+	margin: 10px;
+	margin-bottom: 0;
+	font-size: 15px;
 }
 
 /* Main styles */
 
 body {
-	background-color: rgb(43, 43, 47);
+	background-color: var(--background-color);
 	margin: 0;
+}
+
+* {
+	font-family: "Montserrat", Arial, sans-serif;
+	color: white;
 }
 
 main {
@@ -43,11 +93,17 @@ main {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	margin-bottom: 10px;
 }
 
-* {
-	color: white;
-	font-family: "Montserrat", Arial, sans-serif;
+#container {
+	width: calc(100% - 20px);
+	max-width: 1400px;
+}
+
+#dataTableContainer {
+	width: 100%;
+	overflow-x: auto;
 }
 
 h1 {
@@ -57,29 +113,34 @@ h1 {
 	width: fit-content;
 }
 
-#botones {
+#buttons {
 	margin-bottom: 8px;
 	display: flex; /* Removes middle selectable text */
+	justify-content: space-between;
 }
 
-#botones button {
+#buttons button {
 	background: rgb(30, 30, 30);
 	border: none;
 	width: 100px;
 	height: 26px;
-	cursor: pointer;
 	font-size: 14px;
-	margin: 0 4px;
 	border-radius: 8px;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.search-input {
+	background-color: rgb(30, 30, 30);
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	padding: 6px;
+	max-width: 180px;
+	font-size: 14px;
 }
 
 /* Table Style */
-
-#dataTableContainer {
-	width: calc(100% - 20px);
-	overflow-x: auto;
-	max-width: 1400px;
-}
 
 #status {
 	background: var(--tbody-primary-color);
@@ -115,6 +176,33 @@ tbody tr {
 	background-color: var(--tbody-primary-color);
 }
 
+.password {
+	font-weight: bold;
+	letter-spacing: 2px;
+	user-select: none;
+}
+
+.special-cell {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 !important;
+}
+
+.special-cell span {
+	padding: 8px;
+}
+
+.special-cell div {
+	padding-right: 8px;
+}
+
+.symbol-btn {
+	cursor: pointer;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
 /* tbody tr:nth-child(even) {
 	background-color: rgb(40, 40, 40);
 } */
@@ -139,13 +227,17 @@ tbody tr:last-child td:last-child {
 
 /* Fix Width */
 
-@media (max-width: 370px) {
-	header {
-		position: inherit;
-		padding-bottom: 0;
-	}
 
+/* 370px before */
+
+@media (max-width: 360px) { 
 	h1 {
-		margin-top: 0;
+		margin-top: 35px;
+	}
+}
+
+@media (max-width: 630px) {
+	.top_button span {
+		display: none;
 	}
 }

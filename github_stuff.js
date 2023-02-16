@@ -1,26 +1,22 @@
 (async () => {
+	let secret = localStorage.getItem("secret");
+	if (!secret) return;
+
+	secret = JSON.parse(secret);
+	crypt.secret = secret.decoder;
+
+	if (secret.temporary) {
+		localStorage.removeItem("secret");
+	}
+
 	const {Octokit, App} = await import("https://cdn.skypack.dev/octokit");
 
 	const status = document.getElementById("status");
-	const json_button = document.getElementById("json_button");
-
-	const crypt = {
-		secret: "VFF3403",
-
-		decrypt: (cipher) => {
-			let decipher = CryptoJS.AES.decrypt(cipher, crypt.secret);
-			decipher = decipher.toString(CryptoJS.enc.Utf8);
-			return decipher;
-		}
-	}
-
-	const octokit = new Octokit({
-		auth: atob("Z2hwXzZFeFFJYlhRY3BzMnRmUDVqRFRyU3luSjFzdWVFbjRhRjQ1TQ==")
-	});
-
-	const owner = "agent3204";
-	const repo = "data";
-	const path = "ds.json";
+	const jsonButton = document.getElementById("jsonButton");
+	
+	// const octokit = new Octokit({
+	// 	auth: atob("Z2hwXzZFeFFJYlhRY3BzMnRmUDVqRFRyU3luSjFzdWVFbjRhRjQ1TQ==")
+	// });
 
 	let updating = false;
 	let lastUpdate = 0;
@@ -58,7 +54,8 @@
 		const list = [];
 
 		try {
-			const {data} = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {owner, repo, path});
+			// const {data} = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {owner, repo, path});
+			const data = await requestOctokit(secret.token);
 			const source = atob(data.content);
 			const content = jsonParse(source);
 
@@ -80,7 +77,7 @@
 				order.push(data);
 			});
 	
-			order.sort((a, b) => a.timestamp - b.timestamp);
+			order.sort((a, b) => b.timestamp - a.timestamp);
 	
 			for (let i = 0; i < order.length; i++) {
 				const data = order[i];
@@ -111,7 +108,7 @@
 	update();
 	updateButton.addEventListener("click", update);
 
-	json_button.addEventListener("click", () => {
+	jsonButton.addEventListener("click", () => {
 		if (json_content === null) return;
 
 		const tab = window.open("pretext.html", "_blank");

@@ -1,7 +1,9 @@
-const hideButton = document.getElementById("ocultar");
 const updateButton = document.getElementById("actualizar");
+const searchInput = document.getElementById("search");
 const table = document.getElementById("mainTable");
 const tbody = table.getElementsByTagName("tbody")[0];
+
+let handleSearch = null;
 
 let hidden = true;
 
@@ -28,30 +30,60 @@ function timeAgo(timeMillis) {
 	}
 }
 
-function updatePasswords() {
-	const cells = table.getElementsByTagName("td");
-	for (let i = 0; i < cells.length; i++) {
-		const cell = cells[i];
-		if (cell.classList.contains("password")) {
-			const password = cell.getAttribute("secret");
-			if (hidden) {
-				cell.textContent = "•".repeat(password.length);
-				cell.style = `
-					font-weight: bold;
-					letter-spacing: 2px;
-					user-select: none;
-				`;
-				
-			} else {
-				cell.textContent = password;
-				cell.removeAttribute("style");
-			}
-		}
+function formatTime(millis) {
+	const months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+	const date = new Date(millis);
+
+	const day = date.getDate();
+	const month = date.getMonth();
+	const year = date.getFullYear();
+	const hours = date.getHours();
+	let minutes = date.getMinutes();
+
+	if (minutes < 10) {
+		minutes = "0" + minutes;
+	}
+
+	const todayDate = new Date();
+	const yesterdayDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+	if (todayDate.getDate() === day && todayDate.getMonth() === month && todayDate.getFullYear() === year) {
+		return "Hoy a las " + hours + ":" + minutes;
+	} else if (yesterdayDate.getDate() === day && yesterdayDate.getMonth() === month && yesterdayDate.getFullYear() === year) {
+		return "Ayer a las " + hours + ":" + minutes;
+	} else {
+		return day + " " + months[month] + " " + year + ", " + hours + ":" + minutes;
 	}
 }
 
+// function updatePasswords() {
+// 	const cells = table.getElementsByTagName("td");
+// 	for (let i = 0; i < cells.length; i++) {
+// 		const cell = cells[i];
+// 		if (cell.classList.contains("password")) {
+// 			const password = cell.getAttribute("secret");
+// 			if (hidden) {
+// 				cell.textContent = "•".repeat(password.length);
+// 				cell.setAttribute("oncopy", "return false");
+// 				cell.style = `
+// 					font-weight: bold;
+// 					letter-spacing: 2px;
+// 					user-select: none;
+// 				`;
+				
+// 			} else {
+// 				cell.textContent = password;
+// 				cell.removeAttribute("style");
+// 				cell.removeAttribute("oncopy");
+// 			}
+// 		}
+// 	}
+// }
+
 function replaceList(list) {
 	console.log("Replacing list...");
+
+	const saves = [];
 
 	for (let i = 0; i < list.length; i++) {
 		let {email, password, timestamp} = list[i];
@@ -61,24 +93,65 @@ function replaceList(list) {
 		const passwordCell = row.insertCell(1);
 		const dateCell = row.insertCell(2);
 
+		const passwordSpan = document.createElement("span");
+		const passwordCopy = document.createElement("div");
+
 		emailCell.textContent = email;
-		const passwordInput = document.createElement("input");
-		passwordCell.textContent = password;
-		passwordCell.setAttribute("class", "password");
-		passwordCell.setAttribute("secret", password);
-		passwordCell.setAttribute("oncopy", "return false");
-		dateCell.textContent = "Hace " + timeAgo(Date.now() - timestamp);
+
+		passwordCell.className = "password special-cell";
+		passwordCopy.className = "material-symbols-outlined symbol-btn";
+
+		// dateCell.textContent = "Hace " + timeAgo(Date.now() - timestamp);
+		dateCell.textContent = formatTime(timestamp);
+
+		let visible = false;
+
+		let handleVisibility = function() {
+			if (visible) {
+				passwordCell.classList.remove("password");
+				passwordSpan.textContent = password;
+				passwordCopy.textContent = "visibility_off";
+				passwordCopy.removeAttribute("oncopy");
+			} else {
+				passwordCell.classList.add("password");
+				passwordSpan.textContent = "•".repeat(password.length);
+				passwordCopy.textContent = "visibility";
+				passwordCopy.setAttribute("oncopy", "return false");
+			}
+		}
+
+		passwordCopy.addEventListener("click", () => {
+			visible = !visible;
+			handleVisibility();
+		});
+
+		handleVisibility();
+
+		passwordCell.appendChild(passwordSpan);
+		passwordCell.appendChild(passwordCopy);
+
+		saves.push({email, row});
 	}
-	updatePasswords();
+
+	handleSearch = function() {
+		let text = searchInput.value;
+
+		for (let i = 0; i < saves.length; i++) {
+			const {email, row} = saves[i];
+			if (email.includes(text)) {
+				row.removeAttribute("style");
+			} else {
+				row.style.setProperty("display", "none");
+			}
+		}
+	}
+
+	// updatePasswords();
 	console.log("Replaced!");
 }
 
-hideButton.addEventListener("click", () => {
-	hidden = !hidden;
-	updatePasswords();
-	if (hidden) {
-		hideButton.textContent = "Mostrar";
-	} else {
-		hideButton.textContent = "Ocultar";
+searchInput.addEventListener("input", () => {
+	if (handleSearch) {
+		handleSearch();
 	}
 });
