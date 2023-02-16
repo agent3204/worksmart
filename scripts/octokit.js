@@ -7,8 +7,6 @@ const octokitData = {
 };
 
 const crypt = {
-	// secret: secret.decoder, //"VFF3403",
-
 	decrypt: (cipher) => {
 		let decipher = CryptoJS.AES.decrypt(cipher, crypt.secret);
 		decipher = decipher.toString(CryptoJS.enc.Utf8);
